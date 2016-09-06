@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 30 }
-  validates :email, presence: true, length: { maximum: 255 },
-                    uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def self.from_omniauth(auth)

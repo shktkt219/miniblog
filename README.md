@@ -5,6 +5,7 @@ This is a rails app for posting miniblog. The maximum number of characters in yo
 ##Installation
 
   $ git clone https://github.com/shktkt219/miniblog.git
+  $ cd miniblog
 
 ##Usage
 
@@ -12,7 +13,7 @@ Type the below and launch the server localhost:3000
 
   $ rails s
 
-After opening localhost:3000 in your browser, you can sign in by typing your information or using your Facebook account. 
+After opening localhost:3000 in your browser, you can sign in by typing your information or using your Facebook account.
 
 ## Contributing
 
