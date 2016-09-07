@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :user_signed_in?, only: [:create, :destroy]
   before_action :correct_user, only: :destroy
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:success] = "Post created!"
+      flash[:notice] = "Post created!"
       redirect_to root_url
     else
       @feed_items = []
@@ -15,7 +15,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    flash[:success] = "Post deleted"
+    flash[:notice] = "Post deleted"
+    #just the previous URL
     redirect_to request.referrer || root_url
   end
 

@@ -5,19 +5,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   include UsersHelper
 
+  #ParameterSanitizer deals with permitting specific parameters values for each Devise scope in app.
+  #the sanitizer know about Devise default params and this cord can extend the permitted params.
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
   private
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please Sign in."
-      redirect_to new_user_session_path
-    end
-  end
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || root_url

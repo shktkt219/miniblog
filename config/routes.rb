@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
 
+  #the member method arranges for the routes to respond to URLs containing the user id
   resources :users do
     member do
       get :following, :followers
     end
   end
+  
   resources :posts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
 end

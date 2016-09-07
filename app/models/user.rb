@@ -15,9 +15,7 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 30 }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
@@ -38,6 +36,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  #the following_ids method is synthesized by Active Record based on the has_many :following association
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
@@ -53,6 +52,7 @@ class User < ActiveRecord::Base
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
+  #returns true if the current user is following the other user
   def following?(other_user)
     following.include?(other_user)
   end
