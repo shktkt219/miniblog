@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  #ParameterSanitizer deals with permitting specific parameters values for each Devise scope in app.
-  #the sanitizer know about Devise default params and this cord can extend the permitted params.
+  #ParameterSanitizer deals with permitting specific parameters values for
+  # each Devise scope in app. the sanitizer know about Devise default params
+  # and this cord can extend the permitted params.
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end

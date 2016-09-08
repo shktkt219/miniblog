@@ -1,6 +1,7 @@
-class OmniauthCallbacksController < ApplicationController
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  #all information retrieved from Facebook by Omniauth is available as a hash at request.env["omniauth.auth"]
+  #all information retrieved from Facebook by Omniauth is
+  # available as a hash at request.env["omniauth.auth"]
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"])
     flash[:notice] = "Signed in successfully"

@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  #Devise's RegistrationsController by default calls
+  #User.new_with_session before building a resource
+
   #the following_ids method is synthesized by Active Record based on the has_many :following association
   def feed
     following_ids = "SELECT followed_id FROM relationships
