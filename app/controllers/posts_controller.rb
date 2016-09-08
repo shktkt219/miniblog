@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
-  before_action :user_signed_in?, only: [:create, :destroy]
+  before_action :user_signed_in?, only: [:new, :create, :destroy]
   before_action :correct_user, only: :destroy
+
+  def new
+    @post = Post.new
+  end
 
   def create
     @post = current_user.posts.build(post_params)
@@ -9,7 +13,7 @@ class PostsController < ApplicationController
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      render 'posts/new'
     end
   end
 
@@ -23,7 +27,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:content)
+      params.require(:post).permit(:content, :user_id)
     end
 
     def correct_user
