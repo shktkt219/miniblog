@@ -199,6 +199,11 @@ input {
   }
 }
 
+.checkbox-inline{
+  margin-left: 0px;
+}
+
+
 /* Users index */
 
 .users {
@@ -225,6 +230,11 @@ input {
     padding-top: 0;
   }
   .content {
+    display: block;
+    margin-left: 60px;
+  }
+  .tag {
+    color: #b2cbe4;
     display: block;
     margin-left: 60px;
   }
