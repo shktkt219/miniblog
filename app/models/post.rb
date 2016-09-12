@@ -6,12 +6,7 @@ class Post < ActiveRecord::Base
 
   has_many :post_tags
   has_many :tags, through: :post_tags
+  #permit tags to be nested in our new Post form
   accepts_nested_attributes_for :tags, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  def tags_attributes=(tag_attributes)
-    tag_attributes.values.each do |tag_attribute|
-      tag = Tag.find_or_create_by(tag_attribute)
-      self.tags << tag
-    end
-  end
 end
