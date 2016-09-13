@@ -14,7 +14,6 @@ class CommentsController < ApplicationController
       flash[:notice] = "commented"
       redirect_to user_post_path(@post.user, @post)
     else
-      flash[:alert] = "error"
       render 'comments/new'
     end
   end
@@ -34,7 +33,6 @@ class CommentsController < ApplicationController
       flash[:notice] = "your comment updated"
       redirect_to user_post_path(@post.user, @post)
     else
-      flash[:alert] = "error"
       render 'comments/edit'
     end
   end
