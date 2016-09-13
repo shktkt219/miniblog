@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :user_signed_in?, only: [:new, :create, :destroy]
+  before_action :user_signed_in?, only: [:new, :create, :show, :destroy]
   before_action :correct_user, only: :destroy
 
   def new
@@ -15,6 +15,11 @@ class PostsController < ApplicationController
       @feed_items = []
       render 'posts/new'
     end
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    @comments = Comment.where(post_id: @post)
   end
 
   def destroy

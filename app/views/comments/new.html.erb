@@ -1,0 +1,16 @@
+<div class="row">
+  <aside class="col-md-8">
+    <section class="post_form">
+      <%= form_for [@post, @comment], url: user_post_comments_path do |f| %>
+        <%= render 'shared/error_messages', object:(@comment) %>
+        <div class="field">
+          <%= f.text_area :content, placeholder: "Add your comments." %>
+        </div>
+
+        <div class="action">
+          <%= f.submit "Post", class: "btn btn-primary"%>
+        </div>
+      <% end %>
+    </section>
+  </aside>
+</div>

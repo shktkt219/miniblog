@@ -1,0 +1,13 @@
+Add a comment to a post from a different user
+Sam posts a post
+Another user can add a  comment to sam's post_tags
+
+User could like a post
+Sam posts a new post
+Another user could like the post
+
+rails g model Comment
+create association
+rails g controller Comments create
+add create
+edit views

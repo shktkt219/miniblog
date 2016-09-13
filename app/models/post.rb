@@ -9,4 +9,5 @@ class Post < ActiveRecord::Base
   #permit tags to be nested in our new Post form
   accepts_nested_attributes_for :tags, reject_if: proc { |attributes| attributes['name'].blank? }
 
+  has_many :comments, dependent: :destroy
 end

@@ -1,0 +1,9 @@
+<li>
+  <% @post.comments.each do |comment| %>
+    <span class="user"><%= link_to comment.user.name, comment.user %></span>
+    <span class="content"><%= comment.content %></span>
+    <% if current_user?(comment.user) %>
+      <%= link_to "delete", [comment.post, comment], method: :delete, data: { confirm: "You sure?" }%>
+    <% end %>
+  <% end %>
+</li>

@@ -1,0 +1,27 @@
+<div class="col-md-4">
+  <h3><%= @post.content %></h3>
+  <span class="user">posted by <%= link_to @post.user.name, @post.user %></span><br>
+  <span class="timestamp">Posted<%= time_ago_in_words(@post.created_at)%> ago.</span>
+  <br><br>
+  <span><b>Tag: </b></span><br>
+  <% @post.tags.each do |tag| %>
+    <span class="tag"><%= tag.name %></span><br>
+  <% end %><br>
+  <% if current_user?(@post.user) %>
+    <%= link_to "Delete Post", user_post_path(@post.user, @post), method: :delete, data: { confirm: "You sure?" }%>
+  <% end %> |
+  <%= link_to "Add Comment", new_user_post_comment_path(user_id: current_user.id, post_id: @post.id) %>
+</div>
+<div class="col-md-8">
+  <h4>[Comments]</h4><br>
+  <% if @post.comments.any? %>
+    <% @post.comments.each do |comment| %>
+      <h5><%= comment.content %></h5>
+      <span class="user">commented by <%= comment.user.name %></span> |
+      <% if current_user?(comment.user) %>
+        <%= link_to "Delete Comment", user_post_comment_path(@post.user, comment.post, comment), method: :delete, data: { confirm: "You sure?" } %> |
+        <%= link_to "Edit Comment", edit_user_post_comment_path(@post.user, comment.post, comment) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<div>

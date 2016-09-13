@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # it even works through the posts association, reaching into the posts table and pulling out the desired page of posts.
     @posts = @user.posts.paginate(page: params[:page])
+    @post = Post.find(params[:id])
   end
 
   def edit

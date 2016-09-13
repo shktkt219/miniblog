@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comments/create'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   root 'static_pages#home'
@@ -12,9 +14,10 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
-    resources :posts, only: [:new, :create]
+    resources :posts, only: [:new, :show, :create, :destroy] do
+      resources :comments
+    end
   end
 
-  resources :posts, only: :destroy
   resources :relationships, only: [:create, :destroy]
 end
