@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :user_signed_in?, only: [:new, :create]
+  before_action :user_signed_in?
   before_action :find_post, only: [:create, :destroy, :edit, :update]
   before_action :find_comment, only: [:destroy, :edit, :update]
 

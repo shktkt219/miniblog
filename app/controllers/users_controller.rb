@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_signed_in?, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :user_signed_in?
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # it even works through the posts association, reaching into the posts table and pulling out the desired page of posts.
     @posts = @user.posts.paginate(page: params[:page])
-    @post = Post.find(params[:id])
   end
 
   def edit
