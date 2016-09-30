@@ -1,6 +1,15 @@
 class PostsController < ApplicationController
-  before_action :user_signed_in?, only: [:new, :create, :show, :destroy]
+  before_action :user_signed_in?, only: [:index, :new, :create, :show, :destroy]
   before_action :correct_user, only: :destroy
+
+  def index
+    if params[:user_id] != nil
+      @user = User.find(params[:user_id])
+      @posts = @user.posts
+    else
+      @posts = Post.all
+    end
+  end
 
   def new
     @post = Post.new

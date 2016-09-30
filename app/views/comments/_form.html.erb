@@ -1,9 +1,11 @@
-<li>
-  <% @post.comments.each do |comment| %>
-    <span class="user"><%= link_to comment.user.name, comment.user %></span>
-    <span class="content"><%= comment.content %></span>
-    <% if current_user?(comment.user) %>
-      <%= link_to "delete", [comment.post, comment], method: :delete, data: { confirm: "You sure?" }%>
-    <% end %>
-  <% end %>
-</li>
+<%= form_for [@post, @comment], url: user_post_comment_path do |f| %>
+  <%= render 'shared/error_messages', object:(@comment) %>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "Post", class: "btn btn-primary"%>
+  </div>
+<% end %>

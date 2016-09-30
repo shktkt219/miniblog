@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :tags, only: [:index, :new, :create]
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   root 'static_pages#home'
@@ -12,10 +13,12 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
-    resources :posts, only: [:new, :show, :create, :destroy] do
+    resources :posts, only: [:index, :new, :show, :create, :destroy] do
       resources :comments
     end
   end
+
+  resources :posts, only: :index
 
   resources :relationships, only: [:create, :destroy]
 end
